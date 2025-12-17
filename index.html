@@ -4,22 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yograj Services</title>
-    <nav>
-        <a href="../index.html">Home</a>
-        <a href="../about/index.html">About Us</a>
-        <a href="../contact/index.html">Contact</a>
-    </nav>
-    <!-- Link to an external CSS file if needed -->
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Navigation bar styling */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #00539f;
+            padding: 15px 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 30px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: #ffd700;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Add padding to body to account for fixed nav */
+        body {
+            padding-top: 70px;
+        }
+        
+        /* Section styling */
+        section {
+            min-height: 100vh;
+            padding: 40px 20px;
+            scroll-margin-top: 70px;
+        }
+        
+        section h1 {
+            margin-top: 0;
+        }
+        
+        /* Form styling */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        form input[type="text"],
+        form input[type="email"],
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+        
+        form textarea {
+            resize: vertical;
+        }
+        
+        form input[type="submit"] {
+            background-color: #00539f;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        form input[type="submit"]:hover {
+            background-color: #003d7a;
+        }
+    </style>
 </head>
 <body>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+    </nav>
     
-    <!-- Your visible page content goes here -->
-    <h1>Hello, World!</h1>
-    <p>This is the body of the HTML document.</p>
+    <!-- Home Section -->
+    <section id="home">
+        <h1>Hello, World!</h1>
+        <p>This is the body of the HTML document.</p>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about">
+        <h1>About Us</h1>
+        <p>This is the body of the HTML document.</p>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact">
+        <h1>Contact</h1>
+        <form action="mailto:info@yograjservices.com" method="POST" enctype="text/plain">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="Name"><br><br>
 
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="Email"><br><br>
 
-    <!-- Link to an external JavaScript file if needed -->
-    <!-- <script src="script.js"></script> -->
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="Message" rows="4" cols="50"></textarea><br><br>
+
+            <input type="submit" value="Send Email">
+        </form>
+    </section>
 </body>
 </html>
