@@ -1,0 +1,34 @@
+/* This is a CSS comment */
+body {
+    background-color: #f0f0f0; /* Light gray background for the whole page */
+    font-family: Arial, sans-serif; /* Use Arial font or a generic sans-serif font */
+    margin: 20px; /* Space around the body content */
+    padding: 0;
+  }
+  
+  h1 {
+    color: #00539f; /* Dark blue color for headings */
+    text-align: center; /* Center-align the heading text */
+    text-shadow: 2px 2px 1px black; /* Add a shadow effect to the text */
+    margin-bottom: 20px;
+  }
+  
+  p {
+    color: #333; /* Dark gray color for paragraphs */
+    line-height: 1.6; /* Increase space between lines for readability */
+    border: 1px solid #ccc; /* Add a light gray border around paragraphs */
+    padding: 10px; /* Space between the text and the border */
+  }
+  
+  /* Style for elements with a specific class */
+  .highlight {
+    background-color: yellow;
+    font-weight: bold;
+  }
+  
+  /* Style for a specific element with a unique ID */
+  #main-content {
+    width: 80%;
+    margin: 0 auto; /* Center the content block horizontally */
+  }
+  
