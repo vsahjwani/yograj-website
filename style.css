@@ -1,23 +1,24 @@
 /* This is a CSS comment */
-body {
-    background-color: #f0f0f0; /* Light gray background for the whole page */
-    font-family: Arial, sans-serif; /* Use Arial font or a generic sans-serif font */
-    margin: 20px; /* Space around the body content */
-    padding: 0;
-  }
-  
-  h1 {
+h1 {
     color: #00539f; /* Dark blue color for headings */
     text-align: center; /* Center-align the heading text */
     text-shadow: 2px 2px 1px black; /* Add a shadow effect to the text */
     margin-bottom: 20px;
+    font-size:500%;
+  }
+
+  h2 {
+    color: black; /* Dark blue color for headings */
+    margin-bottom: 20px;
+    font-size:200%;
+    padding: 10px;
   }
   
   p {
     color: #333; /* Dark gray color for paragraphs */
     line-height: 1.6; /* Increase space between lines for readability */
-    border: 1px solid #ccc; /* Add a light gray border around paragraphs */
     padding: 10px; /* Space between the text and the border */
+    font-size:100%;
   }
   
   /* Style for elements with a specific class */
@@ -32,3 +33,101 @@ body {
     margin: 0 auto; /* Center the content block horizontally */
   }
   
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #00539f;
+    padding: 15px 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffd700;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Add padding to body to account for fixed nav */
+body {
+    padding-top: 70px;
+}
+body {
+  background-color: #f0f0f0; /* Light gray background for the whole page */
+  font-family: Arial, sans-serif; /* Use Arial font or a generic sans-serif font */
+  margin: 20px; /* Space around the body content */
+  padding: 0;
+}
+/* Section styling */
+section {
+    min-height: 100vh;
+    padding: 40px 20px;
+    scroll-margin-top: 70px;
+}
+
+section h1 {
+    margin-top: 0;
+}
+
+/* Form styling */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="email"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+form textarea {
+    resize: vertical;
+}
+
+form input[type="submit"] {
+    background-color: #00539f;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background-color: #003d7a;
+}
