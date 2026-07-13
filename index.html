@@ -1,52 +1,575 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yograj Services</title>
-    <link rel="stylesheet" href="style.css">
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#contact">Contact</a>
-    </nav>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yograj Services — Home Automation &amp; Digital Dimming Solutions</title>
+<meta name="description" content="Yograj Services — three generations of electronics heritage, orchestrating light and automation for India's finest homes. Home automation, digital dimming, Raylogic solutions.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath d='M25 54 L55 22 Q60 17 65 22 L95 54 Q98 57 98 62 L98 90 Q98 100 88 100 L56 100 Q42 100 36 86 Q31 74 24 66 Q19 60 25 54 Z' fill='none' stroke='%234a6cf7' stroke-width='5' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='106' r='5' fill='%23e8b96a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&family=Michroma&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="pre-light">
 
-    <!-- Home Section -->
-    <section id="home">
-        <h1>Yograj Services</h1>
-        <p>This is the body of the HTML document.</p>
-            <!-- Testimonials -->
-    </section>
-    
-    <!-- About Section -->
-    <section id="about">
-        <h2>About Us</h2>
-        <p>This is the body of the HTML document.</p>
-    </section>
+<!-- Cursor torch -->
+<div id="cursor-glow" aria-hidden="true"></div>
 
-    <!-- Solutions Section -->
-    <section id="solutions">
-        <h2>Solutions</h2>
-        <p>articles</p>
-    </section>
-    
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Contact</h2>
-        <form action="mailto:info@yograjservices.com" method="POST" enctype="text/plain">
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="Name"><br><br>
+<!-- ============ ENTRY EXPERIENCE ============ -->
+<div id="entry" class="entry" role="dialog" aria-label="Welcome">
+  <div class="entry-inner">
+    <p class="entry-since">Since the 1940s</p>
+    <h2 class="entry-line">Every remarkable home<br><em>begins in darkness.</em></h2>
+    <button id="entry-switch" class="entry-switch" aria-label="Illuminate the website">
+      <span class="switch-ring"></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M12 3v8"/>
+        <path d="M6.3 6.3a8 8 0 1 0 11.4 0"/>
+      </svg>
+    </button>
+    <p class="entry-hint">touch to illuminate</p>
+  </div>
+</div>
 
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="Email"><br><br>
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a class="nav-brand" href="#home" aria-label="Yograj Services — home">
+    <svg class="nav-mark" viewBox="0 0 120 120" aria-hidden="true">
+      <path d="M25 54 L55 22 Q60 17 65 22 L95 54 Q98 57 98 62 L98 90 Q98 100 88 100 L56 100 Q42 100 36 86 Q31 74 24 66 Q19 60 25 54 Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+      <circle cx="16" cy="106" r="5" fill="#e8b96a" stroke="none"/>
+    </svg>
+    <span class="nav-name">YOGRAJ<i>SERVICES</i></span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#story">Story</a>
+    <a href="#experience">Experience</a>
+    <a href="#products">Products</a>
+    <a href="#raylogic">Raylogic</a>
+    <a href="#vision">Vision</a>
+  </nav>
+  <a class="nav-cta" href="#contact">Book a private demo</a>
+</header>
 
-            <label for="message">Message:</label><br>
-            <textarea id="message" name="Message" rows="4" cols="50"></textarea><br><br>
+<main>
 
-            <input type="submit" value="Send Email">
-        </form>
-    </section>
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <canvas id="dust" aria-hidden="true"></canvas>
+  <div class="hero-glow glow-candle" aria-hidden="true"></div>
+  <div class="hero-glow glow-warm" aria-hidden="true"></div>
+
+  <div class="hero-inner">
+    <svg class="hero-mark" viewBox="0 0 120 130" aria-hidden="true">
+      <!-- house -->
+      <path class="draw" pathLength="1" d="M25 54 L55 22 Q60 17 65 22 L95 54 Q98 57 98 62 L98 90 Q98 100 88 100 L56 100 Q42 100 36 86 Q31 74 24 66 Q19 60 25 54 Z"
+            fill="none" stroke="#5f7dff" stroke-width="4.5" stroke-linejoin="round"/>
+      <!-- slats -->
+      <g class="slats" stroke="#5f7dff" stroke-width="3.4" stroke-linecap="round">
+        <line x1="50" y1="78" x2="56" y2="78"/><line x1="62" y1="78" x2="90" y2="78"/>
+        <line x1="52" y1="85" x2="58" y2="85"/><line x1="64" y1="85" x2="90" y2="85"/>
+        <line x1="56" y1="92" x2="62" y2="92"/><line x1="68" y1="92" x2="90" y2="92"/>
+      </g>
+      <!-- wifi -->
+      <g class="wifi" fill="none" stroke="#e8b96a" stroke-width="4" stroke-linecap="round">
+        <circle class="wifi-dot" cx="13" cy="112" r="4" fill="#e8b96a" stroke="none"/>
+        <path class="wifi-a1" d="M22 104 A 13 13 0 0 0 9 91"/>
+        <path class="wifi-a2" d="M31 100 A 24 24 0 0 0 7 76"/>
+      </g>
+    </svg>
+
+    <p class="hero-devanagari lang-hi" lang="hi">योगराज सर्विसिज़</p>
+    <h1 class="hero-wordmark">YOGRAJ SERVICES</h1>
+    <p class="hero-tag">HOME AUTOMATION&nbsp;&nbsp;|&nbsp;&nbsp;DIGITAL DIMMING SOLUTIONS</p>
+
+    <p class="hero-copy">Eight decades of electronics heritage,<br class="br-desk">
+    now orchestrating light for India&rsquo;s finest homes.</p>
+
+    <!-- Master dimmer -->
+    <div class="dimmer" role="group" aria-label="Master dimmer demonstration">
+      <div class="dimmer-head">
+        <span class="dimmer-label">Master&nbsp;Dimmer</span>
+        <span class="dimmer-read"><output id="dim-pct">78%</output><i>·</i><output id="dim-kelvin">2 597 K</output></span>
+      </div>
+      <input type="range" id="hero-dimmer" min="4" max="100" value="78" aria-label="Dim the light">
+      <p class="dimmer-note">Dim-to-warm — the deeper you dim, the warmer the light, exactly like candlelight. Try&nbsp;it.</p>
+    </div>
+  </div>
+
+  <a class="scroll-hint" href="#story" aria-label="Scroll to our story">
+    <span></span>
+  </a>
+</section>
+
+<!-- ============ STORY / HERITAGE ============ -->
+<section class="section story" id="story">
+  <div class="wrap">
+    <p class="overline" data-reveal>Our story</p>
+    <h2 class="display" data-reveal>From the radio era<br><em>to the age of light.</em></h2>
+    <p class="lede" data-reveal>Yograj Services has been synonymous with electronics since its inception.
+    Established in the 1940s, we began with radios — the most aspirational products of their era —
+    and have kept a single promise ever since: <strong>keep up with the times, never compromise on reliability.</strong></p>
+
+    <div class="timeline">
+      <div class="timeline-thread" aria-hidden="true"><i id="thread-fill"></i></div>
+
+      <article class="era" data-reveal>
+        <div class="era-glyph" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <rect x="6" y="16" width="36" height="22" rx="4"/>
+            <circle cx="16" cy="27" r="6"/>
+            <line x1="28" y1="23" x2="38" y2="23"/><line x1="28" y1="28" x2="38" y2="28"/><line x1="28" y1="33" x2="34" y2="33"/>
+            <path d="M12 16 L30 7"/>
+          </svg>
+        </div>
+        <p class="era-date">The 1940s</p>
+        <h3>The Radio Era</h3>
+        <p>We opened our doors in the age of the valve radio — then the most aspirational
+        object a home could own. It taught us our first lesson: people don&rsquo;t buy
+        electronics, they buy what electronics make possible.</p>
+      </article>
+
+      <article class="era" data-reveal>
+        <div class="era-glyph" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <rect x="7" y="12" width="34" height="24" rx="3"/>
+            <rect x="11" y="16" width="26" height="16" rx="1.5"/>
+            <line x1="18" y1="41" x2="30" y2="41"/>
+          </svg>
+        </div>
+        <p class="era-date">The decades after</p>
+        <h3>The Home Electronics Age</h3>
+        <p>Televisions, air conditioners and consumer appliances followed. We served
+        individuals, corporates and trade partners alike — building the relationships
+        and the service discipline that still define us.</p>
+      </article>
+
+      <article class="era" data-reveal>
+        <div class="era-glyph" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <circle cx="24" cy="24" r="15"/>
+            <path d="M24 24 L24 12" transform="rotate(-45 24 24)"/>
+            <circle cx="24" cy="24" r="2.4" fill="currentColor" stroke="none"/>
+            <path d="M9 40 A 21 21 0 0 0 39 40"/>
+          </svg>
+        </div>
+        <p class="era-date">The last decade</p>
+        <h3>The Automation Decade</h3>
+        <p>For over ten years we have designed and delivered home automation and digital
+        dimming solutions — optimum systems backed by a responsive after-sales team,
+        because we believe in relationships that outlast renovations.</p>
+      </article>
+
+      <article class="era" data-reveal>
+        <div class="era-glyph" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22 L23 11 Q24 10 25 11 L36 22 Q37 23 37 24.5 L37 35 Q37 38 34 38 L23 38 Q18 38 16 33 Q14.5 29 12.5 26.5 Q11 24 12 22 Z"/>
+            <path d="M9 41 A 7 7 0 0 0 2 34" transform="translate(6 2)"/>
+          </svg>
+        </div>
+        <p class="era-date">Today</p>
+        <h3>The Third Generation</h3>
+        <p>Now run by the third generation, every new product is extensively tested in-house
+        before we ever offer it to a client. We learn its reliability and its finest
+        features first — so our answers are faster when you need them.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE / ROOM ============ -->
+<section class="section experience" id="experience">
+  <div class="wrap">
+    <p class="overline" data-reveal>The experience</p>
+    <h2 class="display" data-reveal>Every evening,<br><em>perfectly staged.</em></h2>
+    <p class="lede" data-reveal>This room is live. Press a scene on the keypad — or conduct
+    each light yourself — and watch the space obey. This is precisely how your home will feel.</p>
+  </div>
+
+  <div class="room-stage" data-reveal>
+    <div class="room-frame">
+      <svg id="room" viewBox="0 0 1160 620" preserveAspectRatio="xMidYMid meet" aria-label="Interactive living room lighting demonstration">
+        <defs>
+          <radialGradient id="gChand" cx="50%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="#ffcf8e" stop-opacity=".38"/>
+            <stop offset="35%" stop-color="#ffb96a" stop-opacity=".1"/>
+            <stop offset="100%" stop-color="#ffb96a" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="gChandCore" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffd9a0" stop-opacity=".55"/>
+            <stop offset="100%" stop-color="#ffc478" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="gCove" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffd9a0" stop-opacity=".55"/>
+            <stop offset="100%" stop-color="#ffd9a0" stop-opacity="0"/>
+          </linearGradient>
+          <radialGradient id="gLamp" cx="50%" cy="18%" r="78%">
+            <stop offset="0%" stop-color="#ffd49a" stop-opacity=".4"/>
+            <stop offset="40%" stop-color="#ffbe72" stop-opacity=".09"/>
+            <stop offset="100%" stop-color="#ffbe72" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="gArt" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffe1b0" stop-opacity=".7"/>
+            <stop offset="100%" stop-color="#ffe1b0" stop-opacity="0"/>
+          </linearGradient>
+          <radialGradient id="gScreen" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="#bcd0ff" stop-opacity=".9"/>
+            <stop offset="60%" stop-color="#8ea9ef" stop-opacity=".35"/>
+            <stop offset="100%" stop-color="#8ea9ef" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="gBeam" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#c7d6ff" stop-opacity=".28"/>
+            <stop offset="100%" stop-color="#c7d6ff" stop-opacity=".04"/>
+          </linearGradient>
+        </defs>
+
+        <!-- ambient tint -->
+        <rect id="room-tint" x="0" y="0" width="1160" height="620" fill="#120b02" opacity=".0"/>
+
+        <!-- architecture -->
+        <g class="lines" fill="none" stroke="rgba(240,236,226,.16)" stroke-width="1.5">
+          <line x1="30" y1="70"  x2="1130" y2="70"/>
+          <line x1="30" y1="540" x2="1130" y2="540"/>
+        </g>
+
+        <!-- COVE glow -->
+        <g class="fx" id="fx-cove">
+          <rect class="glow" x="30" y="71" width="1100" height="150" fill="url(#gCove)"/>
+          <line x1="60" y1="76" x2="1100" y2="76" stroke="#ffd9a0" stroke-width="2" class="glow strip" stroke-linecap="round"/>
+        </g>
+
+        <!-- WINDOW -->
+        <g class="window">
+          <rect x="80" y="130" width="320" height="370" fill="#080a10" stroke="rgba(240,236,226,.2)" stroke-width="1.5"/>
+          <line x1="186" y1="130" x2="186" y2="500" stroke="rgba(240,236,226,.14)" stroke-width="1.2"/>
+          <line x1="293" y1="130" x2="293" y2="500" stroke="rgba(240,236,226,.14)" stroke-width="1.2"/>
+          <!-- moon -->
+          <circle cx="352" cy="176" r="14" fill="#dfe8ff" opacity=".55"/>
+          <circle cx="346" cy="171" r="12" fill="#080a10" opacity=".92"/>
+          <!-- skyline -->
+          <g fill="#0d1017">
+            <rect x="92"  y="300" width="40" height="200"/>
+            <rect x="140" y="250" width="34" height="250"/>
+            <rect x="182" y="330" width="46" height="170"/>
+            <rect x="236" y="215" width="38" height="285"/>
+            <rect x="282" y="290" width="30" height="210"/>
+            <rect x="318" y="245" width="42" height="255"/>
+            <rect x="364" y="320" width="30" height="180"/>
+          </g>
+          <!-- city lights -->
+          <g id="city" fill="#ffd98c">
+            <rect class="cd" x="148" y="262" width="3" height="4"/><rect class="cd" x="160" y="280" width="3" height="4"/>
+            <rect class="cd" x="243" y="230" width="3" height="4"/><rect class="cd" x="256" y="252" width="3" height="4"/>
+            <rect class="cd" x="243" y="286" width="3" height="4"/><rect class="cd" x="262" y="308" width="3" height="4"/>
+            <rect class="cd" x="326" y="258" width="3" height="4"/><rect class="cd" x="340" y="278" width="3" height="4"/>
+            <rect class="cd" x="330" y="304" width="3" height="4"/><rect class="cd" x="99"  y="312" width="3" height="4"/>
+            <rect class="cd" x="112" y="330" width="3" height="4"/><rect class="cd" x="190" y="342" width="3" height="4"/>
+            <rect class="cd" x="204" y="362" width="3" height="4"/><rect class="cd" x="288" y="300" width="3" height="4"/>
+            <rect class="cd" x="296" y="326" width="3" height="4"/><rect class="cd" x="370" y="330" width="3" height="4"/>
+          </g>
+          <!-- curtains -->
+          <g id="curtain-l" class="curtain">
+            <rect x="80" y="128" width="162" height="374" fill="#10121b"/>
+            <g stroke="rgba(240,236,226,.07)" stroke-width="1.4">
+              <line x1="104" y1="130" x2="104" y2="500"/><line x1="132" y1="130" x2="132" y2="500"/>
+              <line x1="160" y1="130" x2="160" y2="500"/><line x1="188" y1="130" x2="188" y2="500"/><line x1="216" y1="130" x2="216" y2="500"/>
+            </g>
+          </g>
+          <g id="curtain-r" class="curtain">
+            <rect x="238" y="128" width="162" height="374" fill="#10121b"/>
+            <g stroke="rgba(240,236,226,.07)" stroke-width="1.4">
+              <line x1="262" y1="130" x2="262" y2="500"/><line x1="290" y1="130" x2="290" y2="500"/>
+              <line x1="318" y1="130" x2="318" y2="500"/><line x1="346" y1="130" x2="346" y2="500"/><line x1="374" y1="130" x2="374" y2="500"/>
+            </g>
+          </g>
+          <rect x="80" y="130" width="320" height="370" fill="none" stroke="rgba(240,236,226,.2)" stroke-width="1.5"/>
+        </g>
+
+        <!-- WALL ART + picture light -->
+        <g class="fx" id="fx-art">
+          <polygon class="glow" points="492,196 558,196 588,320 462,320" fill="url(#gArt)"/>
+          <g fill="none" stroke="rgba(240,236,226,.22)" stroke-width="1.5">
+            <rect x="470" y="196" width="110" height="122"/>
+            <rect x="482" y="208" width="86" height="98"/>
+            <path d="M492 282 Q510 240 524 262 Q538 284 558 236" stroke="rgba(240,236,226,.3)"/>
+          </g>
+          <rect x="502" y="184" width="46" height="5" rx="2.5" fill="none" stroke="rgba(240,236,226,.3)" stroke-width="1.4"/>
+        </g>
+
+        <!-- SOFA -->
+        <g class="sofa" fill="none" stroke="rgba(240,236,226,.18)" stroke-width="1.5">
+          <path d="M640 452 Q640 436 656 436 L984 436 Q1000 436 1000 452 L1000 496 L640 496 Z"/>
+          <path d="M628 480 Q616 480 616 494 L616 526 Q616 540 630 540 L1010 540 Q1024 540 1024 526 L1024 494 Q1024 480 1012 480"/>
+          <line x1="640" y1="496" x2="1000" y2="496"/>
+          <line x1="758" y1="440" x2="758" y2="494"/>
+          <line x1="878" y1="440" x2="878" y2="494"/>
+        </g>
+        <!-- coffee table -->
+        <g fill="none" stroke="rgba(240,236,226,.15)" stroke-width="1.5">
+          <line x1="470" y1="500" x2="600" y2="500"/>
+          <line x1="482" y1="500" x2="482" y2="540"/>
+          <line x1="588" y1="500" x2="588" y2="540"/>
+        </g>
+
+        <!-- CHANDELIER -->
+        <g class="fx" id="fx-chandelier">
+          <ellipse class="glow" cx="820" cy="278" rx="210" ry="150" fill="url(#gChand)"/>
+          <ellipse class="glow" cx="820" cy="185" rx="95" ry="58" fill="url(#gChandCore)"/>
+          <g fill="none" stroke="rgba(240,236,226,.3)" stroke-width="1.4">
+            <line x1="820" y1="70" x2="820" y2="118"/>
+            <path d="M772 118 L868 118"/>
+            <line x1="778" y1="118" x2="778" y2="168"/>
+            <line x1="799" y1="118" x2="799" y2="196"/>
+            <line x1="820" y1="118" x2="820" y2="150"/>
+            <line x1="841" y1="118" x2="841" y2="184"/>
+            <line x1="862" y1="118" x2="862" y2="162"/>
+          </g>
+          <g class="bulbs" fill="#3a3428">
+            <circle cx="778" cy="174" r="5.5"/>
+            <circle cx="799" cy="202" r="5.5"/>
+            <circle cx="820" cy="156" r="5.5"/>
+            <circle cx="841" cy="190" r="5.5"/>
+            <circle cx="862" cy="168" r="5.5"/>
+          </g>
+        </g>
+
+        <!-- FLOOR LAMP -->
+        <g class="fx" id="fx-lamp">
+          <ellipse class="glow" cx="1063" cy="428" rx="95" ry="145" fill="url(#gLamp)"/>
+          <g fill="none" stroke="rgba(240,236,226,.28)" stroke-width="1.5">
+            <path d="M1035 540 L1091 540"/>
+            <path d="M1063 540 L1063 330 Q1063 296 1063 296"/>
+            <path d="M1043 296 L1083 296 L1075 326 L1051 326 Z"/>
+          </g>
+        </g>
+
+        <!-- CINEMA: projector + screen -->
+        <g class="fx" id="fx-screen">
+          <rect x="900" y="74" width="26" height="12" rx="3" fill="none" stroke="rgba(240,236,226,.3)" stroke-width="1.4"/>
+          <polygon class="glow beam" points="913,88 620,150 620,400" fill="url(#gBeam)"/>
+          <g id="screen-drop">
+            <rect x="590" y="88" width="440" height="8" rx="4" fill="none" stroke="rgba(240,236,226,.3)" stroke-width="1.4"/>
+            <g id="screen-cloth">
+              <rect x="600" y="96" width="420" height="250" fill="#0b0e15" stroke="rgba(240,236,226,.25)" stroke-width="1.4"/>
+              <rect class="glow" x="612" y="108" width="396" height="226" fill="url(#gScreen)"/>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <!-- KEYPAD -->
+    <aside class="keypad" aria-label="Scene keypad — live demo">
+      <div class="keypad-plate">
+        <p class="keypad-brand">RAYLOGIC&nbsp;&middot;&nbsp;SCENES</p>
+        <div class="kgroup" role="group" aria-label="Scenes">
+          <button class="kbtn scene-btn" data-scene="arrival"><span>Arrival</span><i class="led"></i></button>
+          <button class="kbtn scene-btn" data-scene="soiree"><span>Soir&eacute;e</span><i class="led"></i></button>
+          <button class="kbtn scene-btn" data-scene="cinema"><span>Cinema</span><i class="led"></i></button>
+          <button class="kbtn scene-btn" data-scene="midnight"><span>Midnight</span><i class="led"></i></button>
+        </div>
+        <div class="kdiv" aria-hidden="true"></div>
+        <div class="kgroup" role="group" aria-label="Individual lights">
+          <button class="kbtn fx-btn" data-fx="chandelier"><span>Chandelier</span><i class="led"></i></button>
+          <button class="kbtn fx-btn" data-fx="cove"><span>Cove line</span><i class="led"></i></button>
+          <button class="kbtn fx-btn" data-fx="lamp"><span>Floor lamp</span><i class="led"></i></button>
+          <button class="kbtn fx-btn" data-fx="art"><span>Art light</span><i class="led"></i></button>
+          <button class="kbtn fx-btn" data-fx="screen"><span>Cinema screen</span><i class="led"></i></button>
+        </div>
+        <div class="kdiv" aria-hidden="true"></div>
+        <div class="kmaster">
+          <span>Master</span>
+          <input type="range" id="room-master" min="10" max="100" value="85" aria-label="Room master brightness">
+          <output id="room-master-out">85%</output>
+        </div>
+      </div>
+      <p class="keypad-note">Wired live — every control here works,<br>just as it will in your home.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ PRODUCTS ============ -->
+<section class="section products" id="products">
+  <div class="wrap">
+    <p class="overline" data-reveal>Products</p>
+    <h2 class="display" data-reveal>Four ways<br><em>to begin.</em></h2>
+    <p class="lede" data-reveal>Whether you are building from bare shell or refining a finished home,
+    there is a path that fits — every one of them tested in-house before it is ever offered to you.</p>
+
+    <div class="product-grid">
+
+      <article class="pcard" data-reveal>
+        <div class="pcard-visual din" aria-hidden="true">
+          <div class="din-rail">
+            <span class="din-mod"><i></i><i></i></span>
+            <span class="din-mod"><i></i><i></i></span>
+            <span class="din-mod"><i></i><i></i></span>
+            <span class="din-mod"><i></i><i></i></span>
+          </div>
+        </div>
+        <p class="pnum">01</p>
+        <h3>Centralised Solution</h3>
+        <p>A DIN-rail system: dimmers, relays and fan controllers live discreetly in an
+        automation distribution panel at the back end, giving full flexibility in the number
+        of circuits and easy serviceability. At the front, you touch only beautifully
+        designed keypads.</p>
+        <p class="pfit">Best for &mdash; new builds &amp; full renovations</p>
+      </article>
+
+      <article class="pcard" data-reveal>
+        <div class="pcard-visual univo" aria-hidden="true">
+          <div class="univo-panel">
+            <span class="tp"></span><span class="tp"></span>
+            <span class="tp"></span><span class="tp"></span>
+          </div>
+        </div>
+        <p class="pnum">02</p>
+        <h3>UNIVO Series</h3>
+        <p>A glass-panelled module that is both front and back end — no backend panel
+        required. Simplified wiring, easier installation and a long list of features
+        make UNIVO the economical, effective middle path.</p>
+        <p class="pfit">Best for &mdash; elegant simplicity, faster installs</p>
+      </article>
+
+      <article class="pcard pcard-video" data-reveal>
+        <div class="pcard-visual" aria-hidden="true">
+          <video id="go-video" src="assets/go-by-raylogic.mp4" muted loop playsinline preload="metadata"></video>
+          <button id="go-sound" class="video-sound" aria-label="Toggle video sound">&#x1F507;</button>
+        </div>
+        <p class="pnum">03 &nbsp;<span class="pnew">NEW</span></p>
+        <h3>Go by Raylogic</h3>
+        <p>The state-of-the-art retrofit. Your existing switches are replaced by GO modules —
+        and with nothing more than Wi-Fi, your space is automated and online. No rewiring,
+        no renovation, no dust sheets.</p>
+        <p class="pfit">Best for &mdash; finished homes, zero disruption</p>
+      </article>
+
+      <article class="pcard" data-reveal>
+        <div class="pcard-visual voice" aria-hidden="true">
+          <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="voice-line">&ldquo;<span id="voice-typed"></span><span class="caret"></span>&rdquo;</p>
+        </div>
+        <p class="pnum">04</p>
+        <h3>Automation Controllers</h3>
+        <p>Bring air conditioners and AV equipment into the fold. Command everything by
+        voice — Google Home, Amazon Echo — or from the custom Raylogic app on your
+        phone or tablet.</p>
+        <p class="pfit">Best for &mdash; whole-home orchestration</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ RAYLOGIC ============ -->
+<section class="section raylogic" id="raylogic">
+  <div class="wrap">
+    <p class="overline" data-reveal>Our technology partner</p>
+    <h2 class="display" data-reveal>Powered by<br><em>Raylogic.</em></h2>
+    <div class="ray-grid">
+      <div data-reveal>
+        <p class="lede">Every system we design is built on Raylogic — automation and digital
+        dimming engineering we have tested exhaustively in-house, and trusted in our
+        clients&rsquo; homes for over a decade.</p>
+        <p class="placeholder-note">[ Placeholder — detailed Raylogic content to be drawn from the
+        existing Raylogic website: company background, engineering approach, product
+        certifications and project gallery. ]</p>
+      </div>
+      <div class="ray-stats" data-reveal>
+        <div class="stat"><strong data-count="80">0</strong><span>years of electronics heritage</span></div>
+        <div class="stat"><strong data-count="10">0</strong><span>+ years in home automation</span></div>
+        <div class="stat"><strong class="ph" title="Placeholder">[XXX]</strong><span>projects delivered &mdash; placeholder</span></div>
+        <div class="stat"><strong class="ph" title="Placeholder">[XX]</strong><span>cities served &mdash; placeholder</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISION ============ -->
+<section class="section vision" id="vision">
+  <div class="wrap">
+    <p class="overline" data-reveal>Our vision</p>
+    <h2 class="display" data-reveal>What we hold<br><em>ourselves to.</em></h2>
+    <div class="pillars">
+      <div class="pillar" data-reveal>
+        <span class="pillar-num">I</span>
+        <h3>Efficient, trouble-free, customised solutions</h3>
+        <p>Designed around how you live — not around what a catalogue contains.</p>
+      </div>
+      <div class="pillar" data-reveal>
+        <span class="pillar-num">II</span>
+        <h3>Products of uncompromising reliability</h3>
+        <p>Every product is extensively tested at our end before we ever offer it to a client.</p>
+      </div>
+      <div class="pillar" data-reveal>
+        <span class="pillar-num">III</span>
+        <h3>Responsive, dependable, timely service</h3>
+        <p>Deep product knowledge means faster answers when it matters — long after installation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section contact" id="contact">
+  <div class="wrap">
+    <p class="overline" data-reveal>Contact</p>
+    <h2 class="display" data-reveal>Begin with<br><em>a conversation.</em></h2>
+    <div class="contact-grid">
+      <div class="contact-info" data-reveal>
+        <p class="lede">Private demonstrations at our experience studio, or at your site —
+        by appointment.</p>
+        <dl>
+          <div><dt>Telephone</dt><dd><span class="ph" title="Placeholder — replace with real number">+91&nbsp;XXXXX&nbsp;XXXXX</span></dd></div>
+          <div><dt>Email</dt><dd><span class="ph" title="Placeholder — replace with real email">hello@yograjservices.example</span></dd></div>
+          <div><dt>Studio</dt><dd><span class="ph" title="Placeholder — replace with real address">[ Experience studio address, City ]</span></dd></div>
+          <div><dt>Hours</dt><dd>By appointment</dd></div>
+        </dl>
+      </div>
+      <form id="contact-form" class="contact-form" data-reveal novalidate>
+        <label>Your name<input type="text" name="name" autocomplete="name" required placeholder="Full name"></label>
+        <label>Phone<input type="tel" name="phone" autocomplete="tel" required placeholder="+91"></label>
+        <label>Project
+          <select name="project">
+            <option>New build</option>
+            <option>Full renovation</option>
+            <option>Retrofit — no rewiring</option>
+            <option>Commercial / hospitality</option>
+          </select>
+        </label>
+        <label>Tell us about your space<textarea name="message" rows="4" placeholder="Apartment, villa, farmhouse… what should light do for you?"></textarea></label>
+        <button type="submit" class="btn-gold">Request a private demo</button>
+        <p class="form-note">This form is a front-end placeholder — connect it to your
+        email/CRM endpoint before going live.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <svg class="nav-mark" viewBox="0 0 120 120" aria-hidden="true">
+        <path d="M25 54 L55 22 Q60 17 65 22 L95 54 Q98 57 98 62 L98 90 Q98 100 88 100 L56 100 Q42 100 36 86 Q31 74 24 66 Q19 60 25 54 Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+        <circle cx="16" cy="106" r="5" fill="#e8b96a" stroke="none"/>
+      </svg>
+      <div>
+        <p class="footer-name lang-hi" lang="hi">योगराज सर्विसिज़</p>
+        <p class="footer-sub">Three generations of electronics. One obsession: reliability.</p>
+      </div>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="#story">Story</a><a href="#experience">Experience</a>
+      <a href="#products">Products</a><a href="#contact">Contact</a>
+    </nav>
+    <p class="footer-legal">&copy; 2026 Yograj Services &middot; Home Automation | Digital Dimming Solutions &middot; Since the 1940s</p>
+  </div>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/main.js" defer></script>
 </body>
 </html>
