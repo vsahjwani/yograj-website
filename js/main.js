@@ -45,8 +45,21 @@
       document.body.classList.add("lit");
       entry.classList.add("gone");
       applyHeroDimmer(); // paint the hero glow at current slider value
+      restoreDeepLink();  // honour /#section links the entry overlay had blocked
     }, withSound ? 420 : 60);
     setTimeout(function () { if (entry.parentNode) entry.parentNode.removeChild(entry); }, 2600);
+  }
+
+  /* Scroll is locked while the entry overlay is up, so a /#section link
+     lands at the top. Re-apply it once the site is lit. */
+  function restoreDeepLink() {
+    var id = location.hash.slice(1);
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    requestAnimationFrame(function () {
+      el.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+    });
   }
 
   if (reduced) {
@@ -191,14 +204,14 @@
   var masterOut = document.getElementById("room-master-out");
 
   var SCENES = {
-    arrival:  { fx: { chandelier: 0.85, cove: 0.65, lamp: 0.55, art: 0.75, screen: 0 },
-                tint: "#3a2408", tintO: 0.10, curtains: false, city: false },
-    soiree:   { fx: { chandelier: 1,    cove: 0.9,  lamp: 0.85, art: 1,    screen: 0 },
-                tint: "#4a2c06", tintO: 0.16, curtains: false, city: false },
-    cinema:   { fx: { chandelier: 0,    cove: 0.14, lamp: 0.22, art: 0,    screen: 1 },
-                tint: "#060a1e", tintO: 0.38, curtains: true,  city: false },
-    midnight: { fx: { chandelier: 0,    cove: 0.07, lamp: 0.12, art: 0,    screen: 0 },
-                tint: "#040720", tintO: 0.45, curtains: false, city: true }
+    welcome: { fx: { chandelier: 0.85, cove: 0.65, lamp: 0.55, art: 0.75, screen: 0 },
+               tint: "#3a2408", tintO: 0.10, curtains: false, city: false },
+    dine:    { fx: { chandelier: 1,    cove: 0.5,  lamp: 0.3,  art: 0.9,  screen: 0 },
+               tint: "#4a2c06", tintO: 0.16, curtains: false, city: false },
+    tv:      { fx: { chandelier: 0,    cove: 0.14, lamp: 0.22, art: 0,    screen: 1 },
+               tint: "#060a1e", tintO: 0.38, curtains: true,  city: false },
+    sleep:   { fx: { chandelier: 0,    cove: 0.07, lamp: 0.12, art: 0,    screen: 0 },
+               tint: "#040720", tintO: 0.45, curtains: false, city: true }
   };
 
   function renderRoom() {
@@ -258,7 +271,7 @@
     new IntersectionObserver(function (entries, io) {
       if (entries[0].isIntersecting) {
         setTimeout(function () {
-          setScene("arrival", document.querySelector('.scene-btn[data-scene="arrival"]'));
+          setScene("welcome", document.querySelector('.scene-btn[data-scene="welcome"]'));
         }, 500);
         io.disconnect();
       }
@@ -354,5 +367,117 @@
     form.reset();
     showToast("Thank you, " + name.split(" ")[0] + " — we will call you to arrange a private demo.");
   });
+
+
+  /* ---------------- all off ---------------- */
+  var allOff = document.getElementById("all-off");
+  if (allOff) {
+    allOff.addEventListener("click", function () {
+      clickSound(false);
+      fxNames.forEach(function (n) { fx[n].v = 0; });
+      tintEl.style.fill = "#04060f";
+      tintEl.style.opacity = 0.5;
+      room.classList.remove("curtains-closed");
+      room.classList.add("city-bright");
+      document.querySelectorAll(".scene-btn").forEach(function (b) { b.classList.remove("active"); });
+      renderRoom();
+    });
+  }
+
+  /* ============================================================
+     ARCHITECTURE DIAGRAM — controller-based vs controller-as-a-layer
+     ============================================================ */
+  var ARCH = {
+    controller: {
+      cap: "Every press travels through the controller.",
+      paths: ["p-kc", "p-cd"],
+      route: ["p-kc", "p-cd"],
+      points: [
+        "Inputs are received by the controller",
+        "Outputs are triggered by the controller",
+        "No direct communication between keypads and lighting modules",
+        "Controller provides app-based controls",
+        "Logic and cross-functional capabilities",
+        "Schedules and time-based activities can be programmed"
+      ]
+    },
+    layer: {
+      cap: "Keypads speak straight to the dimmers. The controller only adds.",
+      paths: ["p-kd", "p-cd2"],
+      route: ["p-kd"],
+      points: [
+        "Inputs are received directly by the lighting modules",
+        "Outputs are triggered by the keypad and the controller",
+        "Direct communication between keypads and lighting modules (except for functions across areas)",
+        "Controller provides app-based controls",
+        "Logic and cross-functional capabilities",
+        "Schedules and time-based activities can be programmed",
+        "If the controller ever fails, the lighting keeps working"
+      ]
+    }
+  };
+
+  var archSvg = document.getElementById("arch-svg");
+  if (archSvg) {
+    var archCap  = document.getElementById("arch-cap");
+    var archList = document.getElementById("arch-list");
+    var sig      = document.getElementById("sig");
+    var allPaths = ["p-kc", "p-cd", "p-kd", "p-cd2"];
+    var archMode = "controller";
+    var sigRAF   = null;
+
+    function runSignal() {
+      if (sigRAF) cancelAnimationFrame(sigRAF);
+      var segs = ARCH[archMode].route.map(function (id) { return document.getElementById(id); });
+      var lens = segs.map(function (p) { return p.getTotalLength(); });
+      var total = lens.reduce(function (a, b) { return a + b; }, 0);
+      var t0 = null, DUR = 1500;
+      function step(ts) {
+        if (!t0) t0 = ts;
+        var k = ((ts - t0) % (DUR + 500)) / DUR;
+        if (k > 1) { sig.style.opacity = 0; sigRAF = requestAnimationFrame(step); return; }
+        var d = k * total, si = 0;
+        while (si < lens.length - 1 && d > lens[si]) { d -= lens[si]; si++; }
+        var pt = segs[si].getPointAtLength(Math.min(d, lens[si]));
+        sig.setAttribute("cx", pt.x);
+        sig.setAttribute("cy", pt.y);
+        sig.style.opacity = k < 0.06 ? k / 0.06 : (k > 0.94 ? (1 - k) / 0.06 : 1);
+        sigRAF = requestAnimationFrame(step);
+      }
+      sigRAF = requestAnimationFrame(step);
+    }
+
+    function setArch(mode) {
+      archMode = mode;
+      var a = ARCH[mode];
+      allPaths.forEach(function (id) {
+        document.getElementById(id).classList.toggle("on", a.paths.indexOf(id) > -1);
+      });
+      document.getElementById("n-ctrl").classList.toggle("dim", mode === "layer");
+      archCap.textContent = a.cap;
+      archList.innerHTML = "";
+      a.points.forEach(function (p, i) {
+        var li = document.createElement("li");
+        li.textContent = p;
+        li.style.animationDelay = (i * 0.07) + "s";
+        archList.appendChild(li);
+      });
+      document.querySelectorAll(".arch-btn").forEach(function (b) {
+        b.classList.toggle("is-on", b.getAttribute("data-arch") === mode);
+      });
+      if (!reduced) runSignal();
+    }
+
+    document.querySelectorAll(".arch-btn").forEach(function (b) {
+      b.addEventListener("click", function () {
+        clickSound(true);
+        setArch(b.getAttribute("data-arch"));
+      });
+    });
+
+    new IntersectionObserver(function (entries, io) {
+      if (entries[0].isIntersecting) { setArch("controller"); io.disconnect(); }
+    }, { threshold: 0.3 }).observe(archSvg);
+  }
 
 })();
