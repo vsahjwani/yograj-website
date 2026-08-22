@@ -46,6 +46,9 @@
       entry.classList.add("gone");
       applyHeroDimmer(); // paint the hero glow at current slider value
       restoreDeepLink();  // honour /#section links the entry overlay had blocked
+      // the intro fades are slow on purpose; once they are done the dimmer
+      // must track the slider in real time, so swap to fast transitions
+      setTimeout(function () { document.body.classList.add("settled"); }, 3400);
     }, withSound ? 420 : 60);
     setTimeout(function () { if (entry.parentNode) entry.parentNode.removeChild(entry); }, 2600);
   }
@@ -101,6 +104,16 @@
     var s = String(k);
     return s.slice(0, s.length - 3) + " " + s.slice(-3) + " K";
   }
+  var vignette = document.querySelector(".hero-vignette");
+  var litEls = null;
+  function heroLitEls() {
+    if (!litEls) {
+      litEls = [].slice.call(document.querySelectorAll(
+        ".hero-mark-wrap, .hero-devanagari, .hero-wordmark, .hero-tag, .hero-copy"));
+    }
+    return litEls;
+  }
+
   function applyHeroDimmer() {
     var v = Number(dimmer.value);
     var t = v / 100;
@@ -108,10 +121,23 @@
     dimmer.style.setProperty("--fill", v + "%");
     dimPct.textContent = v + "%";
     dimKel.textContent = fmtKelvin(2200 + 500 * Math.pow(t, 1.1));
-    if (document.body.classList.contains("lit")) {
-      glowWarm.style.opacity   = (Math.pow(t, 0.9)).toFixed(3);
-      glowCandle.style.opacity = (Math.sqrt(t) * (1 - t) * 1.15 + 0.05).toFixed(3);
-    }
+    if (!document.body.classList.contains("lit")) return;
+
+    /* the light pool: brighter and wider as it opens up */
+    glowWarm.style.opacity     = Math.pow(t, 0.9).toFixed(3);
+    glowWarm.style.transform   = "scale(" + (0.66 + 0.34 * t).toFixed(3) + ")";
+    glowCandle.style.opacity   = (Math.sqrt(t) * (1 - t) * 1.15 + 0.05).toFixed(3);
+    glowCandle.style.transform = "scale(" + (0.6 + 0.4 * t).toFixed(3) + ")";
+
+    /* dim-to-warm: everything the light falls on loses brightness and gains amber */
+    var warm = Math.pow(1 - t, 1.2);
+    var f = "brightness(" + (0.62 + 0.38 * t).toFixed(3) + ") " +
+            "sepia(" + (warm * 0.55).toFixed(3) + ") " +
+            "saturate(" + (1 + warm * 0.85).toFixed(3) + ")";
+    heroLitEls().forEach(function (el) { el.style.filter = f; });
+
+    /* and the darkness closes in around it */
+    if (vignette) vignette.style.opacity = (0.85 * Math.pow(1 - t, 0.8)).toFixed(3);
   }
   dimmer.addEventListener("input", applyHeroDimmer);
   dimmer.addEventListener("change", function () { clickSound(true); });
